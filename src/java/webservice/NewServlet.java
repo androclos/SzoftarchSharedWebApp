@@ -50,11 +50,9 @@ public class NewServlet extends HttpServlet {
         Service service = Service.create(url, qname);
 
         WebserviceInterface serverServices = service.getPort(WebserviceInterface.class);
-        User[] list = null;
         GameOutcome[] outcomelist = null;
         
         try {
-            list = serverServices.getHelloWorldAsString("alma", "alma");
             outcomelist = serverServices.getGameOutcomes();
         } catch (SQLException ex) {
             Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,20 +70,6 @@ public class NewServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("./page.jsp");
         rd.forward(request, response);
 
-        /*try (PrintWriter out = response.getWriter()) {
-       
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");           
-            out.println("</head>");
-            out.println("<body>");
-            for(int i = 0;i<list.length;i++)
-                out.println(list[i].getName());
-            for(int i = 0;i<outcomelist.length;i++)
-                out.println(outcomelist[i].getGameid());
-            out.println("</body>");
-            out.println("</html>");
-        }*/
     }
 
     public NewServlet() {
